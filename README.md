@@ -1,1 +1,1 @@
-# algoman-docs
+# developer-docs
