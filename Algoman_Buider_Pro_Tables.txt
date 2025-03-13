@@ -1,0 +1,257 @@
+# User Management All Tables 
+
+
+CREATE TABLE am_ums_user_mst (
+    user_id SERIAL PRIMARY KEY,
+    user_name VARCHAR(255),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_post VARCHAR(255),
+    last_updated_post VARCHAR(255),
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    active_status BOOLEAN,
+    postDetails BIGINT,
+    notification_preferences TEXT[],  
+
+    CONSTRAINT fk_post_user FOREIGN KEY (postDetails) REFERENCES am_ums_post_user(post_id) ON DELETE SET NULL
+);
+
+CREATE TABLE am_ums_user_dtls (
+    user_detail_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    gender VARCHAR(50),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_post VARCHAR(255),
+    last_updated_post VARCHAR(255),
+    user_id BIGINT UNIQUE,
+
+    CONSTRAINT fk_user_master_dtls FOREIGN KEY (user_id) REFERENCES am_ums_user_mst(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE am_ums_user_profile (
+    user_profile_id SERIAL PRIMARY KEY,
+    mobile VARCHAR(20),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_post VARCHAR(255),
+    last_updated_post VARCHAR(255),
+    user_id BIGINT UNIQUE,
+
+    CONSTRAINT fk_user_master_profile FOREIGN KEY (user_id) REFERENCES am_ums_user_mst(user_id) ON DELETE CASCADE
+);
+
+CREATE TABLE am_ums_user_security (
+    security_id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_post VARCHAR(255),
+    last_updated_post VARCHAR(255),
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    user_id BIGINT UNIQUE,
+
+    CONSTRAINT fk_user_master_security FOREIGN KEY (user_id) REFERENCES am_ums_user_mst(user_id) ON DELETE CASCADE
+);
+
+
+# Branch Management All Tables
+
+
+CREATE TABLE am_bms_branch_mst (
+    branch_master_pk SERIAL PRIMARY KEY,
+    status BOOLEAN,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_post VARCHAR(255),
+    last_updated_post VARCHAR(255),
+    branch_type VARCHAR(255),
+    branch_code VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE am_bms_branch_dtls (
+    branch_detail_pk SERIAL PRIMARY KEY,
+    branch_name VARCHAR(255),
+    branch_description TEXT,
+    branch_short_name VARCHAR(100),
+    lang_id BIGINT,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_post VARCHAR(255),
+    last_updated_post VARCHAR(255),
+    branch_master_pk BIGINT UNIQUE NOT NULL,
+
+    CONSTRAINT fk_branch_master FOREIGN KEY (branch_master_pk) 
+        REFERENCES am_bms_branch_mst(branch_master_pk) ON DELETE CASCADE
+);
+
+CREATE TABLE am_bms_branch_hierarchy_mpg (
+    branch_hierarchy_pk SERIAL PRIMARY KEY,
+    branch_id BIGINT NOT NULL,
+    parent_branch_id BIGINT,
+
+    CONSTRAINT fk_branch_id FOREIGN KEY (branch_id) 
+        REFERENCES am_bms_branch_mst(branch_master_pk) ON DELETE CASCADE,
+
+    CONSTRAINT fk_parent_branch FOREIGN KEY (parent_branch_id) 
+        REFERENCES am_bms_branch_mst(branch_master_pk) ON DELETE SET NULL
+);
+
+
+#Position Management All Tables
+
+
+CREATE TABLE am_pms_post_mst (
+    position_id SERIAL PRIMARY KEY,
+    branch_id BIGINT,
+    vacant_flag BOOLEAN,
+    status_flag BOOLEAN,
+    crt_post VARCHAR(255),
+    last_updt_post VARCHAR(255),
+    crt_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updt_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE am_pms_post_dtls (
+    position_Detail_id SERIAL PRIMARY KEY,
+    position_name VARCHAR(255),
+    Status_flag BOOLEAN,
+    position_Short_Name VARCHAR(255),
+    lang_id BIGINT,
+    crt_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updt_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    crt_post VARCHAR(255),
+    last_updt_post VARCHAR(255),
+    position_id BIGINT UNIQUE,
+    CONSTRAINT fk_position_master FOREIGN KEY (position_id) REFERENCES am_pms_post_mst(position_id) ON DELETE CASCADE
+);
+
+CREATE TABLE am_pms_category_mpg (
+    post_id SERIAL PRIMARY KEY,
+    user_id BIGINT UNIQUE,
+    dsgn_id BIGINT,
+    status_flag BOOLEAN,
+    crt_post VARCHAR(255),
+    last_updt_post VARCHAR(255),
+    crt_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updt_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    position_id BIGINT UNIQUE,
+    CONSTRAINT fk_position_master FOREIGN KEY (position_id) REFERENCES am_pms_post_mst(position_id) ON DELETE CASCADE
+);
+
+# Privilege Management All Tables
+
+
+CREATE TABLE am_rms_priv_mst (
+    priv_id SERIAL PRIMARY KEY,
+    status_flag BOOLEAN,
+    priv_type BIGINT,
+    priv_url VARCHAR(255),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_post BIGINT,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_updated_post BIGINT
+);
+
+CREATE TABLE am_rms_priv_dtls (
+    priv_details_pk SERIAL PRIMARY KEY,
+    priv_name VARCHAR(255),
+    priv_desc VARCHAR(255),
+    langId BIGINT,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_post BIGINT,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_updated_post BIGINT,
+    priv_id BIGINT UNIQUE,
+    CONSTRAINT fk_priv_master FOREIGN KEY (priv_id) REFERENCES am_rms_priv_mst(priv_id) ON DELETE CASCADE
+);
+
+CREATE TABLE am_rms_priv_prnt_mpg (
+    priv_parent_pk SERIAL PRIMARY KEY,
+    parent_priv_id BIGINT,
+    priv_id BIGINT UNIQUE,
+    CONSTRAINT fk_priv_master_parent FOREIGN KEY (priv_id) REFERENCES am_rms_priv_mst(priv_id) ON DELETE CASCADE
+);
+
+CREATE TABLE am_rms_priv_group_mpg (
+    priv_group_mpg_pk SERIAL PRIMARY KEY,
+    group_id BIGINT,
+    priv_id BIGINT,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_post BIGINT,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_updated_post BIGINT,
+    CONSTRAINT fk_group FOREIGN KEY (group_id) REFERENCES am_rms_group_mst(group_id) ON DELETE CASCADE,
+    CONSTRAINT fk_priv FOREIGN KEY (priv_id) REFERENCES am_rms_priv_mst(priv_id) ON DELETE CASCADE
+);
+
+
+# Role Management All Tables
+
+
+CREATE TABLE am_rms_group_mst (
+    group_id SERIAL PRIMARY KEY,
+    status_flag BOOLEAN,
+    role_type BIGINT,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_post BIGINT,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_updated_post BIGINT
+);
+
+CREATE TABLE am_rms_group_dtls (
+    group_dtls_pk SERIAL PRIMARY KEY,
+    group_short_name VARCHAR(255),
+    group_name VARCHAR(255),
+    lang_id BIGINT,
+    group_desc VARCHAR(255),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_post BIGINT,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_updated_post BIGINT,
+    group_id BIGINT UNIQUE,
+    CONSTRAINT fk_group_master FOREIGN KEY (group_id) REFERENCES am_rms_group_mst(group_id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE am_rms_group_access_mpg (
+    access_group_pk SERIAL PRIMARY KEY,
+    group_id BIGINT,
+    access_on VARCHAR(255),
+    access_type VARCHAR(255),
+    status_flag BOOLEAN
+);
+ 
+
+# Notification Management All Tables 
+
+CREATE TABLE am_nms_notifications (
+    notification_id SERIAL PRIMARY KEY,
+    user_id BIGINT,
+    message TEXT,
+    subject VARCHAR(255),
+    type VARCHAR(50),
+    status VARCHAR(50),
+    retry_count INT,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE am_nms_templates (
+    template_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    last_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    subject VARCHAR(255)
+);
+
+CREATE TABLE system_events (
+    event_id SERIAL PRIMARY KEY,
+    event_name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    priority VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

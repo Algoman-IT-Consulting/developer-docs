@@ -1,0 +1,879 @@
+{
+	"info": {
+		"_postman_id": "f63f0ec8-c795-4d37-8131-e62b4fa94f74",
+		"name": "Algoman Plateform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37445831"
+	},
+	"item": [
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"auth": {
+							"type": "apikey"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"Bmaurya\",\r\n    \"firstName\":\"Brijesh \",\r\n    \"lastName\":\"Sm\",\r\n    \"password\":\"1234\",\r\n    \"email\":\"123@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/user/add_user",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"add_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4eXpAZ21haWwuY29tIiwiaWF0IjoxNzQxNzYzODc4LCJleHAiOjE3NDE3ODE4Nzh9.wedbXT8nN60DO1FCdZHty1ZGJB3kt6ykxO4fkdIXShxvzkCyVPHDkGGG6M68g1wogNi_9xR_FmVLGW9O69MAsA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/user/get_user_by_userId?userId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"get_user_by_userId"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4eXpAZ21haWwuY29tIiwiaWF0IjoxNzQxNzYzODc4LCJleHAiOjE3NDE3ODE4Nzh9.wedbXT8nN60DO1FCdZHty1ZGJB3kt6ykxO4fkdIXShxvzkCyVPHDkGGG6M68g1wogNi_9xR_FmVLGW9O69MAsA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/user/delete_user?userId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"delete_user"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4eXpAZ21haWwuY29tIiwiaWF0IjoxNzQxNzYzODc4LCJleHAiOjE3NDE3ODE4Nzh9.wedbXT8nN60DO1FCdZHty1ZGJB3kt6ykxO4fkdIXShxvzkCyVPHDkGGG6M68g1wogNi_9xR_FmVLGW9O69MAsA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"search\":\"Brijesh\", // search on the basis of username , firstName, lastName, mobile, gender, email\r\n    \"pageNumber\":\"0\",\r\n    \"pageSize\":\"10\",\r\n    \"filter\":\"userProfile.firstName\", // userId, userProfile.firstName, userName, etc.\r\n    \"sortDirection\":\"desc\" // asc or desc\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/user/get_users_list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"get_users_list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4eXpAZ21haWwuY29tIiwiaWF0IjoxNzQxNzYzODc4LCJleHAiOjE3NDE3ODE4Nzh9.wedbXT8nN60DO1FCdZHty1ZGJB3kt6ykxO4fkdIXShxvzkCyVPHDkGGG6M68g1wogNi_9xR_FmVLGW9O69MAsA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"2\",\r\n    \"firstName\":\"Tarun\",\r\n    \"lastName\":\"Kumar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/user/update_user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"update_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"123@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/algoman/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"algoman",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4eXpAZ21haWwuY29tIiwiaWF0IjoxNzQxNzcyOTYyLCJleHAiOjE3NDE3OTA5NjJ9.EmFaM4INnkD2KpUN_L9o5E97XvNpdwwjoVS5gXV1TTDdWJMlbemLXMn-zaXuiu_dMu1A0k2Vd1L2adTKtgzijg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/algoman/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"algoman",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Branch Management",
+			"item": [
+				{
+					"name": "Add Branch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4eXpAZ21haWwuY29tIiwiaWF0IjoxNzQxNzYzODc4LCJleHAiOjE3NDE3ODE4Nzh9.wedbXT8nN60DO1FCdZHty1ZGJB3kt6ykxO4fkdIXShxvzkCyVPHDkGGG6M68g1wogNi_9xR_FmVLGW9O69MAsA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"branchType\":\"child Branch \",\r\n    \"branchCode\":\"PP08\",\r\n    \"branchName\":\"HDFC Bank22233d\",\r\n    \"branchDescription\":\"child branc222h d33escription.\",\r\n    \"branchShortName\":\"HDFM3\",\r\n    \"parentBranchId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/branch/add_branch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"branch",
+								"add_branch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Branch Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4eXpAZ21haWwuY29tIiwiaWF0IjoxNzQxNzYzODc4LCJleHAiOjE3NDE3ODE4Nzh9.wedbXT8nN60DO1FCdZHty1ZGJB3kt6ykxO4fkdIXShxvzkCyVPHDkGGG6M68g1wogNi_9xR_FmVLGW9O69MAsA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/branch/get_branch_details?branchMasterPk=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"branch",
+								"get_branch_details"
+							],
+							"query": [
+								{
+									"key": "branchMasterPk",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Branch",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/branch/delete_branch?branchMasterPk=253",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"branch",
+								"delete_branch"
+							],
+							"query": [
+								{
+									"key": "branchMasterPk",
+									"value": "253"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Branch Hierarchy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/branch/get_branch_hierarchy?branchId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"branch",
+								"get_branch_hierarchy"
+							],
+							"query": [
+								{
+									"key": "branchId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Branch",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"branchMasterPk\":\"1\",\r\n    \"branchType\":\"Child Branch w\",\r\n    \"branchName\":\"HDFC Bank\",\r\n    \"branchDescription\":\"Child Bank branc222h d33escription.\",\r\n    \"branchShortName\":\"HDF3C\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/branch/update_branch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"branch",
+								"update_branch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Position Management",
+			"item": [
+				{
+					"name": "Add Position",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"statusFlag\": true,\r\n  \"vacantFlag\": true,\r\n  \"branchId\": 1,\r\n  \"positionName\": \"Software Engineer\",\r\n  \"positionShortName\": \"SWE\",\r\n  \"langId\": 1,\r\n  \"dsgnId\": 101\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/position/add_position",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"position",
+								"add_position"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Position",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"positionId\": 1,\r\n  \"positionName\": \"Senior Software Engineer\",\r\n  \"positionShortName\": \"Sr. SWE\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/position/update_position",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"position",
+								"update_position"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Position",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/position/delete_position",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"position",
+								"delete_position"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Position Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/position/get_position_details?positionId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"position",
+								"get_position_details"
+							],
+							"query": [
+								{
+									"key": "positionId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Privilege Management",
+			"item": [
+				{
+					"name": "Create Privilege",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"privType\": 1,\r\n  \"privUrl\": \"/dashboard\",\r\n  \"privName\": \"Dashboard Access\",\r\n  \"privDesc\": \"Access to the dashboard\",\r\n  \"langId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/privilege/create_privilege",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"privilege",
+								"create_privilege"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Privilege",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjNAZ21haWwuY29tIiwiaWF0IjoxNzQxNzgxMDU2LCJleHAiOjE3NDE3OTkwNTZ9.FGpFkjiE_aJsumBrM2uVokktkJ7Oy2VgFbkAOoakBTTdbRWfJ9ABo04MrwhEIMU_PLA7Wi6wEBCM3i80DLDEqg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"privId\": 2,  \r\n  \"privType\": 1,\r\n  \"privUrl\": \"/dashboard\",\r\n  \"privName\": \"Dashboard Access Updated\",\r\n  \"privDesc\": \"Updated access to the dashboard\",\r\n  \"langId\": 1,\r\n  \"prntPrivId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/privilege/update_privilege",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"privilege",
+								"update_privilege"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Privilege",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/privilege/delete_privilege?privId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"privilege",
+								"delete_privilege"
+							],
+							"query": [
+								{
+									"key": "privId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Privilege By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/privilege/get_privilege_details?privId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"privilege",
+								"get_privilege_details"
+							],
+							"query": [
+								{
+									"key": "privId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Privilege hierarchy By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/privilege/get_privilege_hierarchy?privId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"privilege",
+								"get_privilege_hierarchy"
+							],
+							"query": [
+								{
+									"key": "privId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role Management",
+			"item": [
+				{
+					"name": "Create Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/role/create_role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"role",
+								"create_role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/role/all_roles_details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"role",
+								"all_roles_details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"groupId\": 1,\r\n  \"roleType\": 1,\r\n  \"groupName\": \"Admin Group Updated\",\r\n  \"groupShortName\": \"ADMIN\",\r\n  \"groupDesc\": \"Updated Admin Group\",\r\n  \"newPrivIds\": [1, 2],\r\n  \"removedPrivIds\": []\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/role/update_role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"role",
+								"update_role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Role By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/role/get_role_detail?roleId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"role",
+								"get_role_detail"
+							],
+							"query": [
+								{
+									"key": "roleId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete role By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/role/delete_role?roleId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"role",
+								"delete_role"
+							],
+							"query": [
+								{
+									"key": "roleId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Role Details With Privilege By Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/role/role_details_with_privileges?roleId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"role",
+								"role_details_with_privileges"
+							],
+							"query": [
+								{
+									"key": "roleId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification Management",
+			"item": [
+				{
+					"name": "Create Template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/notification/create_template",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"notification",
+								"create_template"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Template",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/notification/get_templates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"notification",
+								"get_templates"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
